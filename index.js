@@ -1,8 +1,20 @@
 var express = require('express');
-var bodyParser = require('body-parser')
+var bodyParser = require('body-parser');
 var app = express();
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: false }))
+
+var mongoose = require('mongoose');
+mongoose.Promise = global.Promise;  //清除缓存
+mongoose.connect('mongodb://localhost:27017/express-api')
+
+var Post = require('./models/post')
+var db = mongoose.connection
+
+db.on('error', console.log);
+db.once('open', function() {
+  console.log('success!')
+});
 // app.get('/:name', function(req, res) {
 // var userName = req.params.name
 // var page = '<html>' +
@@ -26,7 +38,7 @@ app.use(bodyParser.urlencoded({ extended: false }))
 //   console.log("GET/post/:posts_id");
 // });
 
-app.get('/write',function(req,res){
+app.get('/',function(req,res){
   var page = "<form method='post' action='/posts'>" +
   "<input type='text' name='title'/>" +
   "<input type='submit'/>" +
@@ -34,8 +46,13 @@ app.get('/write',function(req,res){
   res.send(page)
 })
 app.post('/posts', function(req, res) {
-  res.send("the post title is: " + req.body.title)
+  // res.send("the post title is: " + req.body.title)
   // console.log("POST /posts");
+  var post = new Post({title:req.body.title});
+  post.save(function(err){
+    if(err) console.log(err);
+    console.log('saved');
+  })
 });
 
 // app.put('/posts/:post_id', function(req, res) {
