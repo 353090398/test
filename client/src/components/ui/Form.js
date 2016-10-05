@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {Link} from 'react-router';
+import { Link } from 'react-router';
 import Radium from 'radium';
 
 class Form extends Component {
@@ -60,15 +60,38 @@ class Form extends Component {
       }
     };
   }
-
+  handleSubmit(e){
+    e.preventDefault();
+    let title = this.refs.title.value;
+    let category = this.refs.category.value;
+    let content = this.refs.content.value;
+    if(title.length==0){
+      alert("内容不能为空")
+      return; //跳出handleSubmit 不继续执行post请求
+    }
+    this.props.newPost({title,category,content});
+    // console.log(this.props);
+  }
   render() {
     const styles = this.getStyles();
     return (
-      <form style={styles.form}>
+      <form style={styles.form} onSubmit={this.handleSubmit.bind(this)}>
+
         <div style={styles.div}>
           <label style={styles.label}>标题</label>
           <input style={styles.input} key='1' ref='title' />
         </div>
+
+        <div style={styles.div}>
+          <label style={styles.label}>类别</label>
+          <input style={styles.input} key='2' ref='category' />
+        </div>
+
+        <div style={styles.div}>
+          <label style={styles.label}>内容</label>
+          <input style={styles.input} key='3' ref='content' />
+        </div>
+
         <div style={styles.actions}>
           <button type='submit' style={styles.button}>Submit</button>
           <Link to='/' style={styles.link}>取消</Link>

@@ -11,7 +11,7 @@ class Routes extends React.Component {
       <Router history={browserHistory}>
         <Route path="/" component={App}>
           <IndexRoute component={PostList} />
-          <Route path="/newpost" component={NewPost} />
+          <Route path="/write" component={NewPost} />
         </Route>
       </Router>
     )

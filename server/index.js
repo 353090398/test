@@ -32,14 +32,20 @@ app.get('/posts',function(req,res){
     res.json({ posts : posts }) //res.send(posts)
   })
 })
+
 app.post('/posts', function(req, res) {
-  var post = new Post({title:req.body.title});
+  var post = new Post({
+      title:req.body.title,
+      category:req.body.category,
+      content:req.body.content
+    });
   post.save(function(err){
     if(err) return console.log(err);
     console.log('saved');
   })
     res.json({message:"成功"})//res.redirect('/posts')
 });
+
 app.listen(3000,function(){
   console.log('running on prot 3000...');
 })
