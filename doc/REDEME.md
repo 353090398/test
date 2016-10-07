@@ -68,7 +68,7 @@ $ db.posts.remove({})
 
 ```
 $ use digicity-express-api
-db.dropDatabase()
+$ db.dropDatabase()
 ```
 ### 为什么要记录电子版笔记？
 
@@ -90,7 +90,7 @@ db.dropDatabase()
 下面我们来动手做一个 ```express+mongoose``` 的小```demo``` 。
 
 ### 先写一个最简单的 express 程序
-```index.js```如下：
+index.js如下：
 
 ```
 var express = require('express');
@@ -124,6 +124,7 @@ $ npm install --save mongoose
 $ var mongoose = require('mongoose');
 $ mongoose.connect('mongodb://localhost:27017/digicity-express-api');
 ```
+
 ```mongoose.connect``` 接口用来连接我们系统上安装的 ```mongodb``` 数据库。
 
 如何定位数据库的所在位置？
@@ -133,6 +134,7 @@ $ mongoose.connect('mongodb://localhost:27017/digicity-express-api');
 但是，链接之后，要跟上具体的数据库名字。我们每次链接，都是链接到一个数据库。比如我们这里， 就是 ```digicity-express-api``` （一般与项目名同名）。
 
 如何验证链接成功呢？用下面的代码
+
 ```
 var db = mongoose.connection;
 db.on('error', console.log);
