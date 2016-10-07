@@ -1,11 +1,9 @@
-### 启动
+# Mongodb 数据库操作
 
 ```
-$ mkdir -p data/db
+$ mkdir -p data/db (-p参数可以同时创建父子文件夹)
 
 ```
-
-(-p参数可以同时创建父子文件夹)
 
 ```
 $ mongod --dbpath=./datadb
@@ -17,7 +15,7 @@ $ mongod --dbpath=./datadb
 
 2.命令行接口CLI，对于mongodb我们使用mongo shell命令行来操作启动。
 
-### 启动mongo shell的形式是
+### 开启 Mongo Shell
 
 ```
 $ mongo
@@ -72,7 +70,7 @@ $ db.posts.remove({_id: ObjectId('xxx')})
 
 ```
 $ db.posts.remove({})
-
+  
 ```
 
 ### 删除数数据库
