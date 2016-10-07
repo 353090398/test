@@ -70,3 +70,19 @@ $ db.posts.remove({})
 $ use digicity-express-api
 db.dropDatabase()
 ```
+### 为什么要记录电子版笔记？
+
+1.使用 markdown 格式美观
+
+2.便于更新
+
+3.有 git/github 控制 永远不会丢失
+
+4.便于搜索 ctrl+shift+f
+
+# 用JS操作mongodb
+我们主要基于一个JS库的幫助，Mongoose ，它可以 作为一个npm的包来安裝。
+
+解释一下，一個 **JS库** 就是一組 **JS接口** 的集合。库，英文对应library 。
+
+![](https://github.com/happypeter/digicity-express-api/blob/master/doc/img/002-mongoose.png?raw=true)
