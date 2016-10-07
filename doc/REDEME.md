@@ -2,12 +2,10 @@
 
 ```
 $ mkdir -p data/db (-p参数可以同时创建父子文件夹)
-
 ```
 
 ```
 $ mongod --dbpath=./datadb
-
 ```
 ### 启动操作界面
 
@@ -19,13 +17,11 @@ $ mongod --dbpath=./datadb
 
 ```
 $ mongo
-
 ```
 #### 创建一个数据库
 
 ```
 $ use dataname
-
 ```
 数据库名字一般跟项目名字相同
 
@@ -34,20 +30,17 @@ $ use dataname
 
 ```
 $ use createCollection('collectionname')
-
 ```
 
 #### 插入数据记录
 
 ```
 $ db.posts.insert({title: 'myTitle', content: 'myContent'})
-
 ```
 #### 查看集合中的所有记录
 
 ```
 $ db.posts.find()
-
 ```
 ##### hello Ada
 
@@ -57,20 +50,17 @@ $ db.posts.find()
 
 ```
 $ db.posts.update({_id: ObjectId('xxx')}, {$set: {title: 'mongodb'}})
-
 ```
 
 ### 删除一条记录
 
 ```
 $ db.posts.remove({_id: ObjectId('xxx')})
-
 ```
 ### 删除 posts 集合中的所有记录
 
 ```
 $ db.posts.remove({})
-  
 ```
 
 ### 删除数数据库
@@ -79,5 +69,4 @@ $ db.posts.remove({})
 ```
 $ use digicity-express-api
 db.dropDatabase()
-
 ```
