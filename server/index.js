@@ -1,6 +1,6 @@
 var express = require('express');
-var bodyParser = require('body-parser');
 var app = express();
+var bodyParser = require('body-parser');
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: false }))
 
@@ -27,13 +27,22 @@ app.get('/',function(req,res){
   "</from>"
   res.send(page)
 })
+
 app.get('/posts',function(req,res){
   Post.find().sort({'title': -1}).exec(function(err,posts){
     res.json({ posts : posts }) //res.send(posts)
   })
 })
 
+app.get('/post/:id',function(req,res){
+  Post.findOne({_id:req.params.id},function(err,doc){
+    if(err) return res.send('出错了')
+    res.json({post:doc})
+  })
+})
+
 app.post('/posts', function(req, res) {
+  console.log(req.body);
   var post = new Post({
       title:req.body.title,
       category:req.body.category,

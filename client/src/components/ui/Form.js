@@ -26,8 +26,8 @@ class Form extends Component {
         padding: '10px',
         boxSizing: 'border-box',
         ':focus': {
-          border: '1px solid #00bcd4',
-          outline: 'none'
+        border: '1px solid #00bcd4',
+        outline: 'none'
         }
       },
       actions: {
@@ -57,6 +57,18 @@ class Form extends Component {
         color: '#00bcd4',
         opacity: '.8',
         textDecoration: 'none'
+      },
+      textarea:{
+        width:'500px',
+        height:'150px',
+        padding: '10px',
+        border: '1px solid #ddd',
+        borderRadius: '5px',
+        resize: 'none',
+        ':focus': {
+        border: '1px solid #00bcd4',
+        outline: 'none'
+        }
       }
     };
   }
@@ -89,7 +101,7 @@ class Form extends Component {
 
         <div style={styles.div}>
           <label style={styles.label}>内容</label>
-          <input style={styles.input} key='3' ref='content' />
+          <textarea style={styles.textarea} key='3' ref='content' />
         </div>
 
         <div style={styles.actions}>

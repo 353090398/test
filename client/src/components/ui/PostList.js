@@ -9,7 +9,7 @@ class PostList extends React.Component {
       posts:[]
     }
   }
-  componentWillMount(){
+  componentDidMount(){
     // console.log("hello will mount");
     axios.get('http://localhost:3000/posts').then(res => {
       this.setState({
@@ -44,12 +44,25 @@ getstyles(){
      borderRadius:'20px',
      fontSize: '0.8em',
      color: 'rgb(255, 255, 255)'
-    }
+   },
+   a:{
+     textDecoration:'none',
+     display:'block',
+     color: 'rgb(255, 64, 129)',
+     float:'right'
+   }
   }
 }
   render () {
     let styles = this.getstyles();
-    let posts = this.state.posts.map( (item,i) =><div style={styles.content} key={i}><p>{item.title}</p></div> )
+    let posts = this.state.posts.map( (item,i) =>
+      <div style={styles.content} key={i}>
+        <p>
+          {item.title}
+          <Link to={`/post/${item._id}`} style={styles.a}>show</Link>
+        </p>
+      </div>
+    )
     return(
       <div>
         <Link to='/write' style={styles.btn}>write</Link>
