@@ -29,9 +29,27 @@ class EditPost extends React.Component {
       this.context.router.push('/')
     })
   }
+  getStyles() {
+    return {
+      content: {
+        width: '100%',
+        maxWidth: '600px',
+        margin: '30px auto',
+        backgroundColor: '#fff',
+        borderRadius: '10px',
+        boxShadow: 'rgba(0, 0, 0, 0.12) 0px 1px 6px, rgba(0, 0, 0, 0.12) 0px 1px 4px'
+      },
+      title: {
+        fontSize: '1.2em',
+        textAlign: 'center',
+        paddingTop: '20px'
+      }
+    }
+  }
   render () {
+    const styles = this.getStyles();
     return(
-      <div>
+      <div style={styles.content}>
         { ! isEmpty(this.state.post) ? <EditForm PblishPost={this.PblishPost.bind(this)} post={this.state.post}/> :""}
       </div>
     )
