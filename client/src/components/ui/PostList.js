@@ -1,5 +1,6 @@
 import React from 'react';
 import axios from 'axios';
+import Settings from '../../Settings';
 import { Link } from 'react-router';
 
 class PostList extends React.Component {
@@ -11,7 +12,7 @@ class PostList extends React.Component {
   }
   componentDidMount(){
     // console.log("hello will mount");
-    axios.get('http://localhost:3000/posts').then(res => {
+    axios.get(`${Settings.host}/posts`).then(res => {
       this.setState({
         posts:res.data.posts
       })
@@ -42,14 +43,16 @@ getstyles(){
      textAlign:'center',
      margin:'20px auto',
      borderRadius:'20px',
-     fontSize: '0.8em',
+     fontSize: '1em',
      color: 'rgb(255, 255, 255)'
    },
    a:{
      textDecoration:'none',
-     display:'block',
+     float:'right',
+     fontSize: '1em',
      color: 'rgb(255, 64, 129)',
-     float:'right'
+     textAlign:'center',
+     marginRight:'10px'
    }
   }
 }
@@ -59,6 +62,7 @@ getstyles(){
       <div style={styles.content} key={i}>
         <p>
           {item.title}
+          <Link to={`/posts/${item._id}/edit`} style={styles.a}>Edit</Link>
           <Link to={`/post/${item._id}`} style={styles.a}>show</Link>
         </p>
       </div>

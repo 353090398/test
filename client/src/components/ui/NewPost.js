@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Form from './Form';
 import axios from 'axios';
+import Settings from '../../Settings';
 
 class NewPost extends Component {
   getStyles() {
@@ -21,7 +22,7 @@ class NewPost extends Component {
      };
    }
   newPost(data){
-    axios.post('http://localhost:3000/posts',data)
+    axios.post(`${Settings.host}/posts`,data)
     .then ( res => {
       // console.log(res.data.message);
       this.context.router.push('/')

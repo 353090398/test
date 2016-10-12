@@ -1,5 +1,6 @@
 import React from 'react'
 import axios from 'axios';
+import Settings from '../../Settings';
 
 class ShowPost extends React.Component {
   constructor(){
@@ -10,7 +11,7 @@ class ShowPost extends React.Component {
   }
   componentDidMount(){
     let id = this.props.params.id;
-    let address = `http://localhost:3000/post/${id}`
+    let address = `${Settings.host}/posts/${id}`
     axios.get(address).then(res => {
       this.setState({
         data:res.data.post
@@ -18,26 +19,47 @@ class ShowPost extends React.Component {
       // console.log(this.state.data);
     })
   }
-  render () {
-    let styles={
-      content:{
-        width:'70vw',
-        margin:'0 auto',
-        border:'1px solid #000',
-        padding:'30px'
+  getStyles() {
+    return {
+      content: {
+        position: 'relative',
+        width: '100%',
+        minHeight: '200px',
+        maxWidth: '600px',
+        margin: '30px auto',
+        backgroundColor: '#fff',
+        borderRadius: '5px',
+        padding: '16px',
+        boxShadow: 'rgba(0, 0, 0, 0.12) 0px 1px 6px, rgba(0, 0, 0, 0.12) 0px 1px 4px'
       },
-      h2:{
-        textAlign:'center'
+      category: {
+        position: 'absolute',
+        top: '0',
+        right: '0',
+        padding: '4px 6px',
+        color: '#fff',
+        fontSize: '.8em',
+        backgroundColor: '#ed5a5a'
       },
-      h6:{
-        textAlign:'right'
+      title: {
+        fontSize: '1.3em',
+        paddingTop: '10px',
+        paddingBottom: '20px',
+        textAlign: 'center'
+      },
+      text: {
+        fontSize: '1em',
+        color: 'rgba(0,0,0,.8)'
       }
     }
+  }
+  render () {
+    let styles = this.getStyles();
     return(
       <div style={styles.content}>
-        <h2 style={styles.h2}>{this.state.data.title}</h2>
-        <h6 style={styles.h6}>{this.state.data.category}</h6>
-        {this.state.data.content}
+        <div style={styles.title}>{this.state.data.title}</div>
+        <div style={styles.category}>{this.state.data.category}</div>
+        <div style={styles.text}>{this.state.data.content}</div>
       </div>
     )
   }

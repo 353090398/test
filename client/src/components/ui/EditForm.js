@@ -1,8 +1,24 @@
-import React, { Component } from 'react';
-import { Link } from 'react-router';
+import React, { PropTypes } from 'react'
 import Radium from 'radium';
+import { Link } from 'react-router';
 
-class Form extends Component {
+class EditForm extends React.Component {
+  constructor(props){
+    super(props);
+    this.state={
+      title:this.props.post.title,
+      category:this.props.post.category,
+      content:this.props.post.content
+    }
+  }
+  handleSubmit(e){
+    e.preventDefault();
+    // console.log('ok');
+    const title = this.refs.title.value;
+    const category = this.refs.category.value;
+    const content = this.refs.content.value;
+    this.props.PblishPost({title,category,content});
+  }
   getStyles() {
     return {
       form: {
@@ -59,9 +75,9 @@ class Form extends Component {
         textDecoration: 'none'
       },
       textarea:{
-        width:'100%',
         boxSizing: 'border-box',
-        height:'130px',
+        width:'100%',
+        height:'200px',
         padding: '10px',
         border: '1px solid #ddd',
         borderRadius: '5px',
@@ -73,45 +89,29 @@ class Form extends Component {
       }
     };
   }
-  handleSubmit(e){
-    e.preventDefault();
-    let title = this.refs.title.value;
-    let category = this.refs.category.value;
-    let content = this.refs.content.value;
-    if(title.length==0){
-      alert("内容不能为空")
-      return; //跳出handleSubmit 不继续执行post请求
-    }
-    this.props.newPost({title,category,content});
-    // console.log(this.props);
-  }
-  render() {
+  render () {
     const styles = this.getStyles();
-    return (
+    return(
       <form style={styles.form} onSubmit={this.handleSubmit.bind(this)}>
-
         <div style={styles.div}>
           <label style={styles.label}>标题</label>
-          <input style={styles.input} key='1' ref='title' />
+          <input style={styles.input} ref='title' defaultValue={this.state.title}/>
         </div>
-
         <div style={styles.div}>
           <label style={styles.label}>类别</label>
-          <input style={styles.input} key='2' ref='category' />
+          <input style={styles.input} ref='category' defaultValue={this.state.category}/>
         </div>
-
         <div style={styles.div}>
           <label style={styles.label}>内容</label>
-          <textarea style={styles.textarea} key='3' ref='content' />
+          <textarea style={styles.textarea} ref='content' defaultValue={this.state.content}/>
         </div>
-
         <div style={styles.actions}>
-          <button type='submit' style={styles.button}>Submit</button>
+          <input style={styles.button} type='submit' value='submit'/>
           <Link to='/' style={styles.link}>取消</Link>
         </div>
       </form>
-    );
+    )
   }
 }
 
-export default Radium(Form);
+export default EditForm;
